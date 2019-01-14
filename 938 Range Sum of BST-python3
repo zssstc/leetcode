@@ -1,0 +1,53 @@
+# 938 Range Sum of BST   
+#Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def rangeSumBST(self, root, L, R):
+        """
+        :type root: TreeNode
+        :type L: int
+        :type R: int
+        :rtype: int
+        """
+        res = 0
+        stack = [root]
+        while stack:
+            temp = stack.pop()
+            if temp: #empty or not
+                if L<= temp.val <=R:
+                    res += temp.val
+                    stack.append(temp.right)
+                    stack.append(temp.left)
+                if temp.val<L:
+                    stack.append(temp.right)
+                if temp.val>R:
+                    stack.append(temp.left)
+        return res
+        
+        
+# better solution 
+class Solution:
+    def rangeSumBST(self, root, L, R):
+        """
+        :type root: TreeNode
+        :type L: int
+        :type R: int
+        :rtype: int
+        """
+        res = 0
+        stack = [root]
+        while stack:
+            temp = stack.pop()
+            if temp: #empty or not
+                if L<= temp.val <=R:
+                    res += temp.val
+                if L<temp.val:
+                    stack.append(temp.left)
+                if temp.val<R:
+                    stack.append(temp.right)
+        return res
