@@ -1,0 +1,18 @@
+#929 Unique Email Addresses
+'''here I use str.find() to locate char, replace(),and set()
+class Solution:
+    def numUniqueEmails(self, emails):
+        """
+        :type emails: List[str]
+        :rtype: int
+        """
+        u = []
+        for email in emails:
+            at = email.find('@')
+            temp1 = email[0:at].replace('.','')+email[at:]
+            add = temp1.find('+')
+            at = temp1.find('@')
+            temp2 = temp1[0:add]+temp1[at:]
+            u.append(temp2)
+        s = set(u)
+        return len(s)
